@@ -6,14 +6,13 @@
     <title>@ViewData["Title"] - PracticEPAM</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PracticEPAM.styles.css" asp-append-version="true" />
 </head>
-<body class="bg-secondary-subtle text-dark">
+<body class="bg-secondary-subtle" >
     <nav class="py-2 bg-body-tertiary border-bottom">
         <div class="container d-flex flex-wrap">
-            <ul class="nav me-auto text-dark">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">О нас</a></li>
+            <ul  class="nav me-auto">
+                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active text-dark" aria-current="page">Главная</a></li>
+                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 text-dark">О нас</a></li>
             </ul>
             <ul class="nav">
                 <li class="nav-item"><a href="#" class="btn btn-outline-primary me-2">Войти</a></li>
@@ -27,20 +26,16 @@
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Отзыв.by</span>
             </a>
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
+@*             <form class="col-12 col-lg-auto mb-3 mb-lg-0" role="search">
                 <input type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
-            </form>
+            </form> *@
         </div>
     </header>
     <main role="main" class="pb-3">
          @RenderBody()
     </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - PracticEPAM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
