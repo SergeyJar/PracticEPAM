@@ -1,4 +1,13 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using PracticEPAM.Areas.Identity.Data;
+using PracticEPAM.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("SiteAboutFilmsContextConnection") ?? throw new InvalidOperationException("Connection string 'SiteAboutFilmsContextConnection' not found.");
+
+builder.Services.AddDbContext<SiteAboutFilmsContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SiteAboutFilmsContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
