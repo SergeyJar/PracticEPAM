@@ -1,17 +1,19 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
-using PracticEPAM.Areas.Identity.Data;
-using PracticEPAM.Data;
+using PracticEPAM.Models;
+using PracticEPAM.Services;
+
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("SiteAboutFilmsContextConnection") ?? throw new InvalidOperationException("Connection string 'SiteAboutFilmsContextConnection' not found.");
-
-builder.Services.AddDbContext<SiteAboutFilmsContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SiteAboutFilmsContext>();
-
-// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DbContextConnection") ?? throw new InvalidOperationException("Connection string 'Connection' not found.");
+builder.Services.AddDbContext<DataBaseSiteContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<IdentityUser>
+(options => options.SignIn.RequireConfirmedAccount = true
+).AddRoles<IdentityRole>().AddRoleManager<RoleManager<IdentityRole>>().AddEntityFrameworkStores<DataBaseSiteContext>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,10 +26,15 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
+app.UseAuthentication();
+app.MapRazorPages();
 app.UseAuthorization();
+app.Use((context, next) =>
+{
+    Thread.CurrentPrincipal = context.User;
+    return next(context);
+});
 
 app.MapControllerRoute(
     name: "default",
