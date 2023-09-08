@@ -47,7 +47,7 @@ namespace PracticEPAM.Controllers.AdminsController
         // GET: Products/Create
         public IActionResult Create()
         {
-            ViewData["IdCategories"] = new SelectList(_context.Categories, "IdCategories", "IdCategories");
+            ViewData["IdCategories"] = new SelectList(_context.Categories, "IdCategories", "Category1");
             return View();
         }
 
