@@ -1,0 +1,59 @@
+﻿@model IEnumerable<dynamic>
+<div id="main" class="m-5 p-3 bg-white rounded">
+    <div class="row">
+        @foreach (var a in Model.Take(9))
+        {
+            <div id="GoTo" data-id="@a.Id" class="col-lg-4 col-sm-6">
+                <div class="product-card bg-body-tertiary">
+                    <div class="product-thumb p-2">
+                        <a href="#" class="item1">
+                            @{
+                                var af = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(@a.Photo));
+                                <img src="@af"
+                                     alt="">}
+                        </a>
+                        <div class="product-details">
+                            <h4><a class="text-center" href="#">@a.Name</a></h4>
+                            <p>@a.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" asp-controller="Home" asp-action="Index" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            @{
+                if (ViewBag.Count != null /*&& @ViewBag.Count <= 8*/)
+                {
+                    for (
+                        int i = 1; i <= Math.Ceiling((double)(@ViewBag.Count) / 9); i++)
+                    {
+                        <li class="page-item"><a class="page-link" asp-controller="Home" asp-action="Index" asp-route-page="@(i - 1)">@i</a></li>
+
+                    }
+                } }
+            <li class="page-item">
+                <a class="page-link" asp-controller="Home" asp-action="Index" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="/examples/vendors/popper.js/popper.min.js"></script>
+<script>
+    GoTo.onclick = function () {
+        alert('Спасибо');
+         window.location.href = '@Url.Action("ReviewsPage", "Home")?id=' + $(this).data('id');
+    };
+</script>

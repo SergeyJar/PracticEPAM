@@ -38,6 +38,6 @@ app.Use((context, next) =>
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=MainPage}/{id?}");
 
 app.Run();

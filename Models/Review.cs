@@ -16,5 +16,5 @@ public partial class Review
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-    public virtual IdentityUser IdUserNavigation { get; set; } = null!;
+ 
 }

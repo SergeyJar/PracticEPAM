@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@using System.Text;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+@model string 
+@{ var users = UserManager.Users.AsEnumerable();
+    var role = RoleManager.Roles.AsEnumerable();
+
+    <table>
+        <thead>
+        <tr>
+            <th>user</th>
+            <th>role</th>
+        </tr></thead>
+        <tbody> @foreach (var user in users)
+                {
+                    <tr>
+                        @{var a = await UserManager.GetRolesAsync(user); StringBuilder rolesUser=new StringBuilder();
+                            foreach(var item in a) { rolesUser.Append(item+" "); }
+                            <td>@user?.UserName.ToString()</td>
+                            <td>@rolesUser</td>}
+                    </tr>}
+        </tbody>
+    </table>}

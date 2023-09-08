@@ -9,7 +9,7 @@ public partial class Product
 
     public string Name { get; set; } = null!;
 
-    public byte[] Photo { get; set; } = null!;
+    public byte[]? Photo { get; set; } = null!;
 
     public string Description { get; set; } = null!;
 
@@ -19,7 +19,7 @@ public partial class Product
 
     public int DislikesCount { get; set; }
 
-    public virtual Category IdCategoriesNavigation { get; set; } = null!;
+    public virtual Category? IdCategoriesNavigation { get; set; } = null!;
 
     public virtual ICollection<LikesWithDislike> LikesWithDislikes { get; set; } = new List<LikesWithDislike>();
 }

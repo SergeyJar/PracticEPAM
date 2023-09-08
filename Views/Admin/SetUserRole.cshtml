@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <title>Bootstrap 4 Card (с шапкой)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<form asp-controller="Admin" asp-action="UserFind">
+    <div>Find user by name</div>
+    <input name="name" type="text" patholder="введите текст" />
+    <button type="submit">submit</button>
+</form>
+@{ var users = UserManager.Users.AsEnumerable();
+    var role = RoleManager.Roles.AsEnumerable();
+    <form asp-action="SetUserRole" asp-controller="Admin">
+
+        <select name="name">
+            @foreach (var user in users)
+            {
+                <option value="@user.UserName">@user.UserName</option>
+            }
+        </select> <select name="role">
+            @foreach (var _role in role)
+            {
+                <option value="@_role">@_role</option>
+
+            }
+        </select>
+        <button type="submit">AddRole</button>
+    </form>
+}
+<div><partial name="AllUserWithRoles" /></div>
+
+</body>
+</html>

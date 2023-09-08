@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,11 +15,16 @@
             <ul class="nav me-auto text-dark">
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Главная</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">О нас</a></li>
+                <li class="nav-item"><a asp-controller="Admin" asp-action="Admin" class="nav-link link-body-emphasis px-2">Admin</a></li>
+                @*@if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item"><a asp-controller="Products" asp-action="Index" class="nav-link link-body-emphasis px-2">Product</a></li>
+                }*@
             </ul>
             <ul class="nav">
-                <partial name="_LoginPartial"/>
+                <partial name="_LoginPartial" />
                 @*<li class="nav-item"><a href="#" class="btn btn-outline-primary me-2">Войти</a></li>
-                <li class="nav-item"><a href="#" class="btn btn-primary">Зарегистрироваться</a></li>*@
+                    <li class="nav-item"><a href="#" class="btn btn-primary">Зарегистрироваться</a></li>*@
             </ul>
         </div>
     </nav>
@@ -34,13 +40,11 @@
         </div>
     </header>
     <main role="main" class="pb-3">
-         @RenderBody()
+        @RenderBody()
     </main>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - PracticEPAM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+       
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
