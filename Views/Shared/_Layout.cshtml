@@ -1,35 +1,51 @@
-﻿@using Microsoft.AspNetCore.Identity
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PracticEPAM</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PracticEPAM.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,900;1,100;1,500&display=swap" rel="stylesheet">
+    <style>
+        #name {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+        }
+
+        #main p {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+        #main h6 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 100;
+            font-style: italic;
+        }
+
+        #main h2 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-style: italic;
+        }
+    </style>
 </head>
-<body class="bg-secondary-subtle text-dark">
-    <nav class="py-2 bg-body-tertiary border-bottom">
-        <div class="container d-flex flex-wrap">
-            <ul class="nav me-auto text-dark">
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2 active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">О нас</a></li>
-                <li class="nav-item"><a asp-controller="Admin" asp-action="Admin" class="nav-link link-body-emphasis px-2">Admin</a></li>
-                @*@if (User.IsInRole("Admin"))
-                {
-                    <li class="nav-item"><a asp-controller="Products" asp-action="Index" class="nav-link link-body-emphasis px-2">Product</a></li>
-                }*@
+<body class="text-dark bg-secondary-subtle" style="background-color: #E8E8E8">
+    <nav class="py-2 bg-body-tertiary border-bottom text-dark" style="background-color: #FFFFFF">
+        <div class="container d-flex flex-wrap text-dark">
+            <ul class="nav me-auto">
+                <li class="nav-item"><a href="/" class="nav-link link-body-emphasis px-2 active text-dark" aria-current="page">Главная</a></li>
+                <li class="nav-item"><a asp-page="/" class="nav-link link-body-emphasis px-2 text-dark">О нас</a></li>
+                <li class="nav-item"><a asp-controller="Admin" asp-action="Admin" class="nav-link link-body-emphasis px-2 text-dark">Панель администратора</a></li>
             </ul>
             <ul class="nav">
                 <partial name="_LoginPartial" />
-                @*<li class="nav-item"><a href="#" class="btn btn-outline-primary me-2">Войти</a></li>
-                    <li class="nav-item"><a href="#" class="btn btn-primary">Зарегистрироваться</a></li>*@
             </ul>
         </div>
     </nav>
     <header class="py-3 mb-4 border-bottom bg-white">
-        <div class="container d-flex flex-wrap justify-content-center text-dark">
+        <div class="container d-flex flex-wrap justify-content-center">
             <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto link-body-emphasis text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Отзыв.by</span>
@@ -39,12 +55,14 @@
             </form>
         </div>
     </header>
-    <main role="main" class="pb-3">
+    <div id="main" class="m-5 p-3 bg-white rounded">
         @RenderBody()
-    </main>
+    </div>
 
     <footer class="border-top footer text-muted">
-       
+        <div class="container">
+            &copy; 2023 - PracticEPAM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
