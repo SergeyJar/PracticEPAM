@@ -1,29 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создание роли";
 }
 
-<h1>Create</h1>
-
-<h4>AspNetRole</h4>
+<h4>Создание роли</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
- 
         <form asp-action="CreateRole">
             <div  class="text-danger"></div>
     
             <div class="form-group">
-                <label title="Name" class="control-label"></label>
+                <span>Название роли</span>
                 <input name="roleName" class="form-control" />
                
             </div>
            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="row mt-2">
+                    <div class="col-6">
+                        <input type="submit" value="Создать" class="btn btn-primary" />
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-secondary float-end" asp-action="Admin">Вернуться назад</a>
+                    </div>
             </div>
         </form>
-    </div>
-</div>
 
 
 

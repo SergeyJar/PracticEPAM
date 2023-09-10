@@ -1,33 +1,32 @@
 ﻿@model IEnumerable<PracticEPAM.Models.Category>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Создание категории";
 }
 
-<h1>Index</h1>
+<h1>Создание категории</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Создать новую категорию</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category1)
-            </th>
+            <th>Название категории</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+                <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.Category1)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCategories">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCategories">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCategories">Delete</a>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.IdCategories">Изменить</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdCategories">Удалить</a>
+                    </div>
             </td>
         </tr>
 }

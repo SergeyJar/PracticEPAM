@@ -1,5 +1,60 @@
-﻿<h1>Admin Pannel</h1>
-<a asp-controller="Products" , asp-action="Index">pRODUCTS</a>
-<a asp-controller="Categories" , asp-action="Index">Categories</a>
-<a asp-controller="Admin" , asp-action="CreateRole">CreateRole</a>
-<a asp-controller="Admin" , asp-action="SetUserRole">SetUserRole</a>
+﻿<h1>Панель администратора</h1>
+
+<section class="content mt-2">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="icon float-end">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-postcard" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4Zm7.5.5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7ZM2 5.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1H2.5a.5.5 0 0 1-.5-.5ZM10.5 5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3ZM13 8h-2V6h2v2Z" />
+                        </svg>
+                        </div>
+                    </div>
+                    <a class="card-header text-decoration-none fs-6 text fw-bold " asp-controller="Products" , asp-action="Index">
+                        Создать статью
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="icon float-end">
+                            <img width="80" height="80" src="https://img.icons8.com/wired/80/sorting-answers.png" alt="sorting-answers" />
+                        </div>
+                    </div>
+                    <a class="card-header text-decoration-none fs-6 text fw-bold " asp-controller="Categories" , asp-action="Index">
+                        Создать категорию статьи
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="icon float-end">
+                            <img width="80" height="80" src="https://img.icons8.com/pastel-glyph/80/add-user-male--v2.png" alt="add-user-male--v2" />
+                        </div>
+                    </div>
+                    <a class="card-header text-decoration-none fs-6 text fw-bold " asp-controller="Admin" , asp-action="CreateRole">
+                        Создать роль
+                    </a>
+                </div>
+             </div>
+             <div class="col-lg-3 col-6">
+                <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="icon float-end">
+                            <img width="80" height="80" src="https://img.icons8.com/puffy/80/experimental-user-puffy.png" alt="experimental-user-puffy" />
+                        </div>
+                    </div>
+                    <a class="card-header text-decoration-none fs-6 text fw-bold " asp-controller="Admin" , asp-action="SetUserRole">
+                        Назначить роль
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -8,12 +8,13 @@
 @{ var users = UserManager.Users.AsEnumerable();
     var role = RoleManager.Roles.AsEnumerable();
 
-    <table>
+    <table class="table mt-3">
         <thead>
-        <tr>
-            <th>user</th>
-            <th>role</th>
-        </tr></thead>
+            <tr>
+                <th scope="col">user</th>
+                <th scope="col">role</th>
+            </tr>
+        </thead>
         <tbody> @foreach (var user in users)
                 {
                     <tr>

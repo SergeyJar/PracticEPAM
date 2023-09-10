@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using PracticEPAM.Models;
 using System.Diagnostics;
 
@@ -19,10 +21,24 @@ namespace PracticEPAM.Controllers
             return _context.Products.Count();
         }
         //при переходе открывается меню с отзывами и ты их сам можешь написать
-        public IActionResult ReviewsPage(int i)
+        public async Task<IActionResult> ReviewsPage(int id)
         {
-            return View();
+            if (id == null || _context.Products == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Products
+                .Include(p => p.IdCategoriesNavigation)
+                .FirstOrDefaultAsync(m => m.IdProduct == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
         }
+
         public IActionResult MainPage(int page)
         {// ну типо по 9 на странице отображаем
             if (Math.Ceiling((double)ProductCount() / 9) >= page)

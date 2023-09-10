@@ -1,54 +1,58 @@
 ﻿@model PracticEPAM.Models.Product
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создание статьи";
 }
 
-<h1>Create</h1>
-
-<h4>Product</h4>
+<h4>Создание статьи</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form  enctype="multipart/form-data"  asp-action="Create">
+    <div class="mx-auto">
+        <form class="form-control" enctype="multipart/form-data"  asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Название</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label text="Photo" class="control-label"></label>
+                <label text="Photo" class="control-label">Фото</label>
                 <input type="file" required name="Photo" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label">Описание</label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCategories" class="control-label"></label>
+                <label asp-for="IdCategories" class="control-label">ID категории</label>
                 <select asp-for="IdCategories" class ="form-control" asp-items="ViewBag.IdCategories"></select>
             </div>
             <div class="form-group">
-                <label asp-for="LikesCount" class="control-label"></label>
+                <label asp-for="LikesCount" class="control-label">Количество лайков</label>
                 <input asp-for="LikesCount" class="form-control" />
                 <span asp-validation-for="LikesCount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DislikesCount" class="control-label"></label>
+                <label asp-for="DislikesCount" class="control-label">Количество дизлайков</label>
                 <input asp-for="DislikesCount" class="form-control" />
                 <span asp-validation-for="DislikesCount" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+@*             <div class="form-group">
+                <span>Содержимое статьи</span>
+                <input class="form-control" />
+                <span asp-validation-for="DislikesCount" class="text-danger"></span>
+            </div> *@
+            <div class="row mt-2">
+                <div class="col-6">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-secondary float-end" asp-action="Admin">Вернуться назад</a>
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
