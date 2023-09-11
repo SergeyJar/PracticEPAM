@@ -65,16 +65,33 @@ namespace PracticEPAM.Controllers
             return View();
         }
 
-        // POST: Reviews/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        public IActionResult Create()
+        {
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "Name");
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult Create(int id)
         {
             ViewData["IdProduct"] = new SelectList(_context.Products.Where(P => P.IdProduct == id), "IdProduct", "Name");
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,ReviewHtml")] Review review)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(MainPage));
+            }
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct", review.IdProduct);
+            return View(review);
+        }
+
         public IActionResult Privacy()
         {
             return View();

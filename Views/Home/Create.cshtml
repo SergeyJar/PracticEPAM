@@ -17,8 +17,9 @@
                 <span asp-validation-for="IdUser" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="IdProduct" type="hidden" class="control-label">Название обозреваемого продукта</label>
-            <select asp-for="IdProduct" class="form-control" asp-items="ViewBag.IdProduct"></select>
+            <label asp-for="IdProduct" hidden class="control-label">Название обозреваемого продукта</label>
+            <select asp-for="IdProduct" hidden class="form-control" asp-items="ViewBag.IdProduct"></select>
+            <span asp-validation-for="IdProduct" class="text-danger"></span>
             </div>
 @*             <div class="form-group">
                 <label asp-for="ReviewHtml" class="control-label"></label>
