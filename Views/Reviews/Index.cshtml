@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PracticEPAM.Models.Review>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewHtml)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProductNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewHtml)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProductNavigation.IdProduct)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdReview">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdReview">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdReview">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
