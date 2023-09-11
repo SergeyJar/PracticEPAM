@@ -25,7 +25,6 @@ namespace PracticEPAM.Controllers
         public List<PracticEPAM.Models.Review> Reviews(int id)
         {
             var REVIEWS =_context.Reviews.Where(p=>p.IdProduct==id).ToList();
-            if(REVIEWS.Any()) { return null; }
             return REVIEWS;
         }
             public async Task<IActionResult> ReviewsPage(int id)
@@ -65,9 +64,37 @@ namespace PracticEPAM.Controllers
             }
             return View();
         }
+        public IActionResult Create()
+        {
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct");
+            return View();
+        }
 
+        // POST: Reviews/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,ReviewHtml")] Review review)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(review);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(MainPage));
+            }
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct", review.IdProduct);
+            return View(review);
+        }
         public IActionResult Privacy()
         {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ReviewsHtml(int id)
+        {
+            var REVIEWS = _context.Reviews.Where(p => p.IdReview == id).FirstOrDefault();
+            ViewBag.Html = REVIEWS.ReviewHtml;
             return View();
         }
 

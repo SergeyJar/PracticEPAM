@@ -1,4 +1,7 @@
-﻿@model PracticEPAM.ViewModels.ReviewsPage
+﻿@using Microsoft.AspNetCore.Identity
+@model PracticEPAM.ViewModels.ReviewsPage
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
 <h1 id="name" class="text-center"> @Model.Product.Name</h1>
 <p class="text-center">@Model.Product.Description</p>
 <h6 class="text-center">5 сентября 2023г.</h6>
@@ -14,6 +17,11 @@
             </div>
         </div>
     </div>
-</div>
-    <partial name="ReviewsPartial"  />
+</div
+>@if (SignInManager.IsSignedIn(User))
+{
+
+    <a asp-controller="Home" asp-action="Create"> Create отзыв </a>
 }
+<partial name="ReviewsPartial" />
+

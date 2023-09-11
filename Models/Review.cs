@@ -14,7 +14,9 @@ public partial class Review
 
     public string ReviewHtml { get; set; } = null!;
 
-    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+    public virtual ICollection<Comment>? Comments { get; set; } = new List<Comment>();
 
- 
+    public virtual Product? IdProductNavigation { get; set; } = null!;
+
+
 }

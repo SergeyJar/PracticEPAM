@@ -1,9 +1,12 @@
-﻿@model PracticEPAM.ViewModels.ReviewsPage
+﻿@using Microsoft.AspNetCore.Identity
+@model PracticEPAM.ViewModels.ReviewsPage
+@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
 <div id="main" class="m-5 p-3 bg-white rounded">
     <div class="row">
         @foreach (var a in Model.Reviews)
         {
-            <div id="GoTo" data-id="@a.IdProduct" class="col-lg-4 col-sm-6">
+            <div  class="col-lg-4 col-sm-6">
                 <div class="product-card bg-body-tertiary">
                     <div class="product-thumb p-2">
                         <a href="#" class="item1">
@@ -12,10 +15,18 @@
                                 <img src="@af"
                                      alt="">
                             }
+
                         </a>
+                        @{
+                            var afc = UserManager.FindByIdAsync(@a.IdUser);
+                                
+                            <p>  @afc.Result.UserName </p>
+
+                        }
                         <div class="product-details">
                             <h4><a class="text-center" href="#">@Model.Product.Name</a></h4>
                             <p>@Model.Product.Description</p>
+                            <a asp-controller="Home" asp-action="ReviewsHtml" asp-route-id="@a.IdReview"> перейти </a>
                         </div>
                     </div>
                 </div>
