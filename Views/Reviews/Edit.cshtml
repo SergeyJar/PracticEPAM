@@ -8,8 +8,6 @@
 
 <h4>Review</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdReview" />
@@ -23,22 +21,35 @@
                 <select asp-for="IdProduct" class="form-control" asp-items="ViewBag.IdProduct"></select>
                 <span asp-validation-for="IdProduct" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ReviewHtml" class="control-label"></label>
-                <input asp-for="ReviewHtml" class="form-control" />
+            <div class="form-group mt-3">
+                <textarea asp-for="ReviewHtml"></textarea>
                 <span asp-validation-for="ReviewHtml" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
-    </div>
-</div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+<script src="https://cdn.tiny.cloud/1/efvuwqhzpbq45qrktmnmex1io61pea1e0fd9fws7d9ut7j74/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+        ],
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

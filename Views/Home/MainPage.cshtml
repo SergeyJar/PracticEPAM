@@ -6,16 +6,15 @@
             <div  data-id="@a.Id" class="col-lg-4 col-sm-6">
                 <div class="product-card bg-body-tertiary">
                     <div class="product-thumb p-2">
-                        <a href="#" class="item1">
+                        <a asp-controller="Home" asp-action="ReviewsPage" asp-route-id="@a.Id" class="item1">
                             @{
                                 var af = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(@a.Photo));
                                 <img src="@af"
                                      alt="">}
                         </a>
                         <div class="product-details">
-                            <h4><a class="text-center" href="#">@a.Name</a></h4>
+                            <h4><a class="text-center " asp-controller="Home" asp-action="ReviewsPage" asp-route-id="@a.Id">@a.Name</a></h4>
                             <p>@a.Description</p>
-                            <a asp-controller="Home" asp-action="ReviewsPage" asp-route-id="@a.Id"> перейти </a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +53,6 @@
 <script src="/examples/vendors/popper.js/popper.min.js"></script>
 <script>
     GoTo.onclick = function () {
-        alert('Спасибо');
          window.location.href = '@Url.Action("ReviewsPage", "Home")?id=' + $(this).data('id');
     };
 </script>

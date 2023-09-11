@@ -76,7 +76,6 @@ namespace PracticEPAM.Controllers.AdminsController
             return View(product);
         }
 
-        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Products == null)
@@ -89,7 +88,8 @@ namespace PracticEPAM.Controllers.AdminsController
             {
                 return NotFound();
             }
-            ViewData["IdCategories"] = new SelectList(_context.Categories, "IdCategories", "IdCategories", product.IdCategories);
+
+            ViewData["IdCategories"] = new SelectList(_context.Categories, "IdCategories", "Category1", product.IdCategories);
             return View(product);
         }
 
@@ -98,17 +98,30 @@ namespace PracticEPAM.Controllers.AdminsController
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,Name,Photo,Description,IdCategories,LikesCount,DislikesCount")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,Name,Description,IdCategories,LikesCount,DislikesCount")] Product product, IFormFile? PhotoF)
         {
             if (id != product.IdProduct)
             {
                 return NotFound();
+            }
+            product.Photo = _context.Products.FindAsync(product.IdProduct).Result.Photo;
+            if (PhotoF != null)
+            {
+                byte[] imageData = null;
+                // считываем переданный файл в массив байтов
+                using (var binaryReader = new BinaryReader(PhotoF.OpenReadStream()))
+                {
+                    imageData = binaryReader.ReadBytes((int)PhotoF.Length);
+                }
+
+                product.Photo = imageData;
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    _context.ChangeTracker.Clear();
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -125,7 +138,7 @@ namespace PracticEPAM.Controllers.AdminsController
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCategories"] = new SelectList(_context.Categories, "IdCategories", "IdCategories", product.IdCategories);
+            ViewData["IdCategories"] = new SelectList(_context.Categories, "IdCategories", "Category1", product.IdCategories);
             return View(product);
         }
 

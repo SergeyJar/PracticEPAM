@@ -28,23 +28,23 @@ namespace PracticEPAM.Controllers
             return REVIEWS;
         }
             public async Task<IActionResult> ReviewsPage(int id)
-        {
-            if (id == null || _context.Products == null)
             {
-                return NotFound();
-            }
+                if (id == null || _context.Products == null)
+                {
+                    return NotFound();
+                }
 
-            var product =_context.Products.Where(p=>p.IdProduct==id).FirstOrDefault();
-            if (product == null)
-            {
-                return NotFound();
-            }
-            ViewModels.ReviewsPage reviews = new ViewModels.ReviewsPage();
-            reviews.Reviews = Reviews(id);
-            reviews.Product=product;
-     return View(reviews);
+                var product =_context.Products.Where(p=>p.IdProduct==id).FirstOrDefault();
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                ViewModels.ReviewsPage reviews = new ViewModels.ReviewsPage();
+                reviews.Reviews = Reviews(id);
+                reviews.Product=product;
+                return View(reviews);
            
-        }
+            }
 
         public IActionResult MainPage(int page)
         {// ну типо по 9 на странице отображаем
@@ -64,27 +64,16 @@ namespace PracticEPAM.Controllers
             }
             return View();
         }
-        public IActionResult Create()
-        {
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct");
-            return View();
-        }
 
         // POST: Reviews/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,ReviewHtml")] Review review)
+        public IActionResult Create(int id)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(MainPage));
-            }
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct", review.IdProduct);
-            return View(review);
+            ViewData["IdProduct"] = new SelectList(_context.Products.Where(P => P.IdProduct == id), "IdProduct", "Name");
+            return View();
         }
         public IActionResult Privacy()
         {
