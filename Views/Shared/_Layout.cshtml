@@ -31,6 +31,10 @@
         }
     </style>
 </head>
+@*@if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item"><a asp-controller="Products" asp-action="Index" class="nav-link link-body-emphasis px-2">Product</a></li>
+                }*@
 <body class="text-dark bg-secondary-subtle" style="background-color: #E8E8E8">
     <nav class="py-2 bg-body-tertiary border-bottom text-dark" style="background-color: #FFFFFF">
         <div class="container d-flex flex-wrap text-dark">
