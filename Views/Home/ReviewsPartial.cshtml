@@ -1,0 +1,25 @@
+﻿@model PracticEPAM.ViewModels.ReviewsPage
+<div id="main" class="m-5 p-3 bg-white rounded">
+    <div class="row">
+        @foreach (var a in Model.Reviews)
+        {
+            <div id="GoTo" data-id="@a.IdProduct" class="col-lg-4 col-sm-6">
+                <div class="product-card bg-body-tertiary">
+                    <div class="product-thumb p-2">
+                        <a href="#" class="item1">
+                            @{
+                                var af = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(@Model.Product.Photo));
+                                <img src="@af"
+                                     alt="">
+                            }
+                        </a>
+                        <div class="product-details">
+                            <h4><a class="text-center" href="#">@Model.Product.Name</a></h4>
+                            <p>@Model.Product.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PracticEPAM.Models;
@@ -8,6 +9,7 @@ namespace PracticEPAM.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly DataBaseSiteContext _context;
         private readonly ILogger<HomeController> _logger;
 
@@ -20,23 +22,29 @@ namespace PracticEPAM.Controllers
         {
             return _context.Products.Count();
         }
-        //при переходе открывается меню с отзывами и ты их сам можешь написать
-        public async Task<IActionResult> ReviewsPage(int id)
+        public List<PracticEPAM.Models.Review> Reviews(int id)
+        {
+            var REVIEWS =_context.Reviews.Where(p=>p.IdProduct==id).ToList();
+            if(REVIEWS.Any()) { return null; }
+            return REVIEWS;
+        }
+            public async Task<IActionResult> ReviewsPage(int id)
         {
             if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .Include(p => p.IdCategoriesNavigation)
-                .FirstOrDefaultAsync(m => m.IdProduct == id);
+            var product =_context.Products.Where(p=>p.IdProduct==id).FirstOrDefault();
             if (product == null)
             {
                 return NotFound();
             }
-
-            return View(product);
+            ViewModels.ReviewsPage reviews = new ViewModels.ReviewsPage();
+            reviews.Reviews = Reviews(id);
+            reviews.Product=product;
+     return View(reviews);
+           
         }
 
         public IActionResult MainPage(int page)

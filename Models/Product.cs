@@ -20,6 +20,6 @@ public partial class Product
     public int DislikesCount { get; set; }
 
     public virtual Category? IdCategoriesNavigation { get; set; } = null!;
-
+    public virtual ICollection<Review> Review { get; set; } = new List<Review>();
     public virtual ICollection<LikesWithDislike> LikesWithDislikes { get; set; } = new List<LikesWithDislike>();
 }
