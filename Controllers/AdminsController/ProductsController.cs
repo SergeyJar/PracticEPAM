@@ -121,6 +121,7 @@ namespace PracticEPAM.Controllers.AdminsController
             {
                 try
                 {
+                    _context.ChangeTracker.Clear();
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
