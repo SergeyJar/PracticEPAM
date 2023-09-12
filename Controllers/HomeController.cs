@@ -27,14 +27,14 @@ namespace PracticEPAM.Controllers
             var REVIEWS =_context.Reviews.Where(p=>p.IdProduct==id).ToList();
             return REVIEWS;
         }
-            public async Task<IActionResult> ReviewsPage(int id)
-            {
+        public async Task<IActionResult> ReviewsPage(int id)
+        {
                 if (id == null || _context.Products == null)
                 {
                     return NotFound();
                 }
 
-                var product =_context.Products.Where(p=>p.IdProduct==id).FirstOrDefault();
+                var product =_context.Products.Include(p => p.IdCategoriesNavigation).Where(p=>p.IdProduct==id).FirstOrDefault();
                 if (product == null)
                 {
                     return NotFound();
@@ -44,7 +44,7 @@ namespace PracticEPAM.Controllers
                 reviews.Product=product;
                 return View(reviews);
            
-            }
+        }
 
         public IActionResult MainPage(int page)
         {// ну типо по 9 на странице отображаем
@@ -65,13 +65,6 @@ namespace PracticEPAM.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Create()
-        {
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "Name");
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Create(int id)
         {
@@ -80,7 +73,7 @@ namespace PracticEPAM.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,ReviewHtml")] Review review)
+        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,ReviewHtml, Name, Description")] Review review)
         {
             if (ModelState.IsValid)
             {
@@ -96,12 +89,27 @@ namespace PracticEPAM.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult ReviewsHtml(int id)
+      
+
+        public async Task<IActionResult> ReviewsHtmlAsync(int id)
         {
+            if (id == null || _context.Reviews == null)
+            {
+                return NotFound();
+            }
+
+            var review = await _context.Reviews
+                .Include(r => r.IdProductNavigation)
+                .FirstOrDefaultAsync(m => m.IdReview == id);
+            if (review == null)
+            {
+                return NotFound();
+            }
+
             var REVIEWS = _context.Reviews.Where(p => p.IdReview == id).FirstOrDefault();
             ViewBag.Html = REVIEWS.ReviewHtml;
-            return View();
+
+            return View(review);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

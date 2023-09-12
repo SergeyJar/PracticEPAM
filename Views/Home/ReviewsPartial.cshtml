@@ -27,8 +27,8 @@
                             <p class="text-center" style="font-size: 14px;"> Пользователь: @afc.Result.UserName </p>
                         }
                         <div class="product-details">
-                            <h4><a class="text-center" asp-controller="Home" asp-action="ReviewsHtml" asp-route-id="@a.IdReview">@Model.Product.Name</a></h4>
-                            <p>@Model.Product.Description</p>
+                            <h4><a class="text-center" asp-controller="Home" asp-action="ReviewsHtml" asp-route-id="@a.IdReview">@a.Name</a></h4>
+                            <p>@a.Description</p>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@
 @inject UserManager<IdentityUser> UserManager
 @inject SignInManager<IdentityUser> SignInManager
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Создать отзыв";
 }
 
 <h4>Создать отзыв</h4>
@@ -13,19 +13,29 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="IdUser" type="hidden" value="@UserManager.GetUserId(User) " class="form-control" />
+                <input asp-for="IdUser" hidden value="@UserManager.GetUserId(User) " class="form-control" />
                 <span asp-validation-for="IdUser" class="text-danger"></span>
             </div>
             <div class="form-group">
-            <label asp-for="IdProduct" hidden class="control-label">Название обозреваемого продукта</label>
-            <select asp-for="IdProduct" hidden class="form-control" asp-items="ViewBag.IdProduct"></select>
-            <span asp-validation-for="IdProduct" class="text-danger"></span>
+                <label asp-for="IdProduct" hidden class="control-label">Название обозреваемого продукта</label>
+                <select asp-for="IdProduct" hidden class="form-control" asp-items="ViewBag.IdProduct"></select>
+                <span asp-validation-for="IdProduct" class="text-danger"></span>
             </div>
 @*             <div class="form-group">
                 <label asp-for="ReviewHtml" class="control-label"></label>
                 <input asp-for="ReviewHtml" class="form-control" />
                 <span asp-validation-for="ReviewHtml" class="text-danger"></span>
             </div> *@
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название отзыва</label>
+                <input asp-for="Name" type="text" required class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Краткое описание</label>
+                <input asp-for="Description" type="text" required class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
             <div class="form-group mt-3">
                     <textarea asp-for="ReviewHtml"></textarea>
                     <span asp-validation-for="ReviewHtml" class="text-danger"></span>
@@ -35,9 +45,9 @@
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
                 </div>
                 <div class="col-6">
-                    <a class="btn btn-secondary float-end" asp-controller="Home" asp-action="MainPage">Вернуться назад</a>
+                    <a class="btn btn-secondary float-end"  href='javascript: history.length > 1 ? history.go(-1): null' с>Вернуться назад</a>
                 </div>
-            </div>
+             </div>
         </form>
 
 

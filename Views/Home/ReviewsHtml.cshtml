@@ -1,1 +1,23 @@
-﻿@Html.Raw(@ViewBag.Html)
+﻿@model PracticEPAM.Models.Review
+
+@{
+    ViewData["Title"] = "Отзыв";
+}
+
+<div>
+    <h1 id="name" class="text-center">@Html.DisplayFor(model => model.Name)</h1>
+    <p class="text-center">@Html.DisplayFor(model => model.Description)</p>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-9">
+                <div style="width: auto; height: auto;">
+                    <img object-fit="cover" style="max-width: 100%; max-height: 400px; display: inline; float: right" src="@String.Format(" data:image /gif;base64,{0}",Convert.ToBase64String(@Model.IdProductNavigation.Photo))" alt="im faded">
+                </div>
+            </div>
+            <div class="col-3 d-block float-end">
+                <div>Обозреваемый объект: @Model.IdProductNavigation.Name</div>
+            </div>
+         </div>
+    </div>
+    @Html.Raw(@ViewBag.Html)
+</div>

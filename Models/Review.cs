@@ -12,6 +12,10 @@ public partial class Review
 
     public int IdProduct { get; set; }
 
+    public string Name { get; set; } = null!;
+
+    public string Description { get; set; } = null!;
+
     public string ReviewHtml { get; set; } = null!;
 
     public virtual ICollection<Comment>? Comments { get; set; } = new List<Comment>();

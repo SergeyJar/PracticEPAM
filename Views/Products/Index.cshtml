@@ -6,47 +6,22 @@
 
 <h1>Статьи <a asp-action="Create" class="btn btn-primary">Создать новую</a></h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Название</th>
-            <th>Фото</th>
-            <th>Описание</th>
-            <th>Лайки</th>
-            <th>Дизлайки</th>
-            <th>ID категории</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @{
-                    <img object-fit="cover" class="myImg" src="@String.Format(" data:image /gif;base64,{0}",Convert.ToBase64String(item.Photo))" alt="im faded">
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LikesCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DislikesCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCategoriesNavigation.IdCategories)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdProduct">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdProduct">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdProduct">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    @foreach (var item in Model)
+    {
+      <div class="row mb-2">
+        <div class="col-4">
+             @{
+                <img object-fit="cover" class="myImg" src="@String.Format(" data:image /gif;base64,{0}",Convert.ToBase64String(item.Photo))" alt="im faded">
+              }
+        </div>
+        <div class=" col-8">
+                <div style="font-size: 28px;">@Html.DisplayFor(modelItem => item.Name)</div>
+                <div style="font-size: 12px;">@Html.DisplayFor(modelItem => item.IdCategoriesNavigation.Category1)</div>
+                <p style="height:44px; overflow: hidden; font-size: 15px;">@Html.DisplayFor(modelItem => item.Description)</p>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdProduct">Изменить</a>
+                <a class="btn btn-warning"  asp-action="Details" asp-route-id="@item.IdProduct">Детали</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdProduct">Удалить</a>
+        </div>
+      </div>
+    }
+

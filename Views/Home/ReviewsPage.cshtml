@@ -12,15 +12,14 @@
             </div>
         </div>
         <div class="col-3 d-block float-end">
-            <div>
-            </div>
+            <div>Категория: @Model.Product.IdCategoriesNavigation.Category1</div>
         </div>
     </div>
 </div
 >@if (SignInManager.IsSignedIn(User))
 {
 
-    <a asp-controller="Home" asp-action="Create" asp-route-id="@Model.Product.IdProduct"> Create отзыв </a>
+    <a class="btn btn-primary d-block" asp-controller="Home" asp-action="Create" asp-route-id="@Model.Product.IdProduct">Создать отзыв</a>
     <p class="mt-2 text-center">Или смотреть отзывы других пользователей</p>
 }
 <partial name="ReviewsPartial" />

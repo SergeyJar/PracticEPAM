@@ -41,13 +41,17 @@ namespace PracticEPAM.Controllers
                 return NotFound();
             }
 
+            var REVIEWS = _context.Reviews.Where(p => p.IdReview == id).FirstOrDefault();
+            ViewBag.Html = REVIEWS.ReviewHtml;
+
             return View(review);
         }
 
         // GET: Reviews/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct");
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "Name");
             return View();
         }
 
@@ -56,7 +60,7 @@ namespace PracticEPAM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,ReviewHtml")] Review review)
+        public async Task<IActionResult> Create([Bind("IdReview,IdUser,IdProduct,Name,Description,ReviewHtml")] Review review)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +68,7 @@ namespace PracticEPAM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct", review.IdProduct);
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "Name", review.IdProduct);
             return View(review);
         }
 
@@ -81,7 +85,7 @@ namespace PracticEPAM.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct", review.IdProduct);
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "Name", review.IdProduct);
             return View(review);
         }
 
@@ -90,7 +94,7 @@ namespace PracticEPAM.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdReview,IdUser,IdProduct,ReviewHtml")] Review review)
+        public async Task<IActionResult> Edit(int id, [Bind("IdReview,IdUser,IdProduct,Name,Description,ReviewHtml")] Review review)
         {
             if (id != review.IdReview)
             {
@@ -117,7 +121,7 @@ namespace PracticEPAM.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "IdProduct", review.IdProduct);
+            ViewData["IdProduct"] = new SelectList(_context.Products, "IdProduct", "Name", review.IdProduct);
             return View(review);
         }
 

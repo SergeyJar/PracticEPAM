@@ -1,38 +1,47 @@
 ﻿@model PracticEPAM.Models.Review
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Изменение отзыва";
 }
 
-<h1>Edit</h1>
-
-<h4>Review</h4>
+<h4>Изменение отзыва</h4>
 <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdReview" />
             <div class="form-group">
-                <label asp-for="IdUser" class="control-label"></label>
-                <input asp-for="IdUser" class="form-control" />
+                <label asp-for="IdUser" hidden class="control-label"></label>
+                <input asp-for="IdUser" hidden class="form-control" />
                 <span asp-validation-for="IdUser" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdProduct" class="control-label"></label>
-                <select asp-for="IdProduct" class="form-control" asp-items="ViewBag.IdProduct"></select>
+                <label asp-for="IdProduct" hidden class="control-label"></label>
+                <select asp-for="IdProduct" hidden class="form-control" asp-items="ViewBag.IdProduct"></select>
                 <span asp-validation-for="IdProduct" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Название отзыва</label>
+                <input asp-for="Name" type="text" required class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Краткое описание</label>
+                <input asp-for="Description" type="text" required class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">
                 <textarea asp-for="ReviewHtml"></textarea>
                 <span asp-validation-for="ReviewHtml" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="row mt-2">
+                <div class="col-6">
+                    <input type="submit" value="Изменить" class="btn btn-primary" />
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-secondary float-end" href='javascript: history.length > 1 ? history.go(-1): null' с>Вернуться назад</a>
+                </div>
             </div>
         </form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 
 <script src="https://cdn.tiny.cloud/1/efvuwqhzpbq45qrktmnmex1io61pea1e0fd9fws7d9ut7j74/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
