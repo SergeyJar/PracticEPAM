@@ -56,7 +56,7 @@ namespace PracticEPAM.Controllers.AdminsController
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdProduct,Name,Photo,Description,IdCategories,LikesCount,DislikesCount")] Product product, IFormFile Photo)
+        public async Task<IActionResult> Create([Bind("IdProduct,Name,Photo,Description,IdCategories")] Product product, IFormFile Photo)
         {
             byte[] imageData = null;
             // считываем переданный файл в массив байтов
@@ -98,7 +98,7 @@ namespace PracticEPAM.Controllers.AdminsController
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,Name,Description,IdCategories,LikesCount,DislikesCount")] Product product, IFormFile? PhotoF)
+        public async Task<IActionResult> Edit(int id, [Bind("IdProduct,Name,Description,IdCategories")] Product product, IFormFile? PhotoF)
         {
             if (id != product.IdProduct)
             {

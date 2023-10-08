@@ -5,9 +5,6 @@
     ViewData["Title"] = "Вход";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
         <section>
             <form id="account" method="post">
                 <h2>Используйте свою учетную запись для входа.</h2>
@@ -32,7 +29,7 @@
                     </div>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Вход</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary mt-2">Вход</button>
                 </div>
                 <div>
                     <p>
@@ -47,9 +44,6 @@
                 </div>
             </form>
         </section>
-    </div>
-
-</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -60,16 +60,6 @@ public partial class DataBaseSiteContext : IdentityDbContext<IdentityUser>
 
         });
 
-        modelBuilder.Entity<LikesWithDislike>(entity =>
-        {
-            entity.Property(e => e.IdUser).HasMaxLength(450);
-
-            entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.LikesWithDislikes)
-                .HasForeignKey(d => d.IdProduct)
-                .HasConstraintName("FK_LikesWithDislikes_Product");
-
-        });
-
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.IdProduct);

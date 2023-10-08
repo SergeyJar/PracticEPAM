@@ -2,6 +2,7 @@
 @model PracticEPAM.ViewModels.ReviewsPage
 @inject UserManager<IdentityUser> UserManager
 @inject SignInManager<IdentityUser> SignInManager
+
 <h1 id="name" class="text-center"> @Model.Product.Name</h1>
 <p class="text-center">@Model.Product.Description</p>
 <div class="container mb-4">
@@ -15,11 +16,16 @@
             <div>Категория: @Model.Product.IdCategoriesNavigation.Category1</div>
         </div>
     </div>
-</div
->@if (SignInManager.IsSignedIn(User))
+</div>
+@if (SignInManager.IsSignedIn(User))
 {
 
     <a class="btn btn-primary d-block" asp-controller="Home" asp-action="Create" asp-route-id="@Model.Product.IdProduct">Создать отзыв</a>
+    <p class="mt-2 text-center">Или смотреть отзывы других пользователей</p>
+}
+@if (!SignInManager.IsSignedIn(User))
+{
+    <a class="btn btn-primary d-block" asp-area="Identity" asp-page="/Account/Login">Создать отзыв</a>
     <p class="mt-2 text-center">Или смотреть отзывы других пользователей</p>
 }
 <partial name="ReviewsPartial" />
